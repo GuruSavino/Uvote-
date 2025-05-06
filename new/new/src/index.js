@@ -4,13 +4,12 @@ import "./assets/output.css";
 import Dashboard from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./assets/output.css";
-import Navbar from "./components/organizer/layout/navbar";
+import Layout from "./components/organizer/layout/layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Navbar />
-    <Dashboard />
+    <Layout />
   </React.StrictMode>
 );
 
