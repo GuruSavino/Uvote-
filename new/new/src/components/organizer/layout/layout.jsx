@@ -13,8 +13,8 @@ export default function Layout() {
         <Sidebar />
         {/* <ManageEventTabcontent /> */}
         {/* <ManageContestDashboard /> */}
-        <NomineeBoard />
-        {/* <MainDashboard /> */}
+        {/* <NomineeBoard /> */}
+        <MainDashboard />
       </div>
     </>
   );

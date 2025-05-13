@@ -5,6 +5,7 @@ export default function EventCard({ title }) {
       <div className="bg-gray-700 text-white text-center py-2 text-sm">
         Manage Event
       </div>
+      <p>Modify Event</p>
     </div>
   );
 }

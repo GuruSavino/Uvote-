@@ -7,7 +7,9 @@ export default function StatCard({ label, count, color = "gray" }) {
   };
 
   return (
-    <div className={`text-white px-4 py-2 rounded shadow ${colorMap[color]}`}>
+    <div
+      className={` flex items-center gap-4 py-4 text-white px-4 rounded shadow ${colorMap[color]}`}
+    >
       <p className="text-sm">{label}</p>
       <p className="text-xl font-bold">{count}</p>
     </div>
