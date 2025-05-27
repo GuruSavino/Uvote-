@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { Link } from "react-router-dom";
 
 // Register chart elements
 ChartJS.register(
@@ -105,9 +106,11 @@ export default function VotingTabcontent() {
 
           {/* Bottom Row */}
           <div className="mt-4 flex items-center gap-4">
-            <button className="bg-orange-600 text-white px-4 py-2 rounded text-sm">
-              Manage Contest
-            </button>
+            <Link to="/dashboard/managecontest">
+              <button className="bg-orange-600 text-white px-4 py-2 rounded text-sm cursor-pointer">
+                Manage Contest
+              </button>
+            </Link>
             <span className="text-sm">
               <button className="bg-red-600 text-white px-4 py-2 rounded text-sm">
                 Turn off voting

@@ -8,9 +8,10 @@ import {
   AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/outline";
 
-import NewEventModal from "./newEventModal";
+// import NewEventModal from "./newEventModal";
 import ModifyEventModal from "./modifyEventModal";
 import ModalWrapper from "../../molecules/modalWrapper";
+import { Link } from "react-router-dom";
 
 export default function MainDashboard() {
   const [contests, setContests] = useState([
@@ -52,13 +53,13 @@ export default function MainDashboard() {
   };
 
   return (
-    <div className="grid grid-cols-12 min-h-screen p-6 gap-6 bg-gray-50">
+    <div className="grid grid-cols-12 min-h-screen p-6 gap-6">
       {/* Left Pane - 9/12 columns */}
       <div className="col-span-9 space-y-6">
-        <p className="text-center text-xl my-2">GENERAL DASHBOARD</p>
+        <p className="text-center text-xl my-2">MAIN DASHBOARD</p>
         <hr />
         {/* Stats */}
-        <div className="grid md:grid-cols-3 w-80 gap-4">
+        <div className="flex gap-4">
           <StatCard label="Total Events" count={2} color="purple" />
           <StatCard label="Live Contests" count={1} color="green" />
           <StatCard label="Live Tickets" count={20} color="blue" />
@@ -74,13 +75,6 @@ export default function MainDashboard() {
                 className="text-green-600 font-medium cursor-pointer"
               >
                 <PlusCircleIcon className="inline size-8" /> New Event
-              </button>
-              <button
-                // onClick={() => handleOpenModifyEventModal(clickedEvent)}
-                className="text-red-600 font-medium cursor-pointer"
-              >
-                <AdjustmentsHorizontalIcon className="inline size-8" /> Modify
-                Event
               </button>
             </div>
           </div>
@@ -100,11 +94,6 @@ export default function MainDashboard() {
 
       {/* Right Pane - 3/12 columns */}
       <div className="col-span-3 space-y-6">
-        {/* Profile theme buttons */}
-        {/* <div className="flex gap-4 justify-center">
-          <div className="w-6 h-6 bg-black rounded-full"></div>
-          <div className="w-6 h-6 bg-black rounded-full"></div>
-        </div> */}
         <div className="flex gap-4">
           <div className="relative">
             <BellIcon className="h-6 w-6 text-gray-600" />
@@ -140,12 +129,12 @@ export default function MainDashboard() {
       </div>
 
       {/*Modals*/}
-      <ModalWrapper open={newEventOpen} onClose={handleCloseModal}>
+      {/* <ModalWrapper open={newEventOpen} onClose={handleCloseModal}>
         <NewEventModal
           onClose={handleCloseModal}
           onSubmit={handleSubmitEvent}
         />
-      </ModalWrapper>
+      </ModalWrapper> */}
 
       {/* <ModalWrapper open={modifyEventOpen} onClose={handleCloseModal}>
         <ModifyEventModal

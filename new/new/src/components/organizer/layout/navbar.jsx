@@ -3,6 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <nav className="w-full h-[7lvh] bg-gradient-to-r from-lime-600 via-orange-500 to-red-500 px-6 py-2 flex justify-between items-center text-white shadow-md">
+      {/* <nav className="w-full h-[7lvh] bg-indigo-600 px-6 py-2 flex justify-between items-center text-white shadow-md"> */}
       <div className="font-bold text-lg">
         <span className="text-white">Uvote.com</span>
       </div>

@@ -1,9 +1,18 @@
 import React from "react";
+import {
+  ChartBarIcon,
+  BuildingStorefrontIcon,
+  BellAlertIcon,
+  TrophyIcon,
+  ChartPieIcon,
+  CreditCardIcon,
+  BellIcon,
+} from "@heroicons/react/24/outline";
 
 const Sidebar = () => {
   return (
-    <div className="h-full w-full bg-yellow-700 flex flex-col items-center py-0">
-      <div className="bg-white min-w-full m-0">
+    <div className="h-full w-full border-r bg-white flex flex-col items-center py-0">
+      <div className="min-w-full m-0">
         {/* Profile Circle */}
         <div className="w-20 h-20 bg-gray-500 rounded-full m-auto my-2"></div>
 
@@ -16,24 +25,48 @@ const Sidebar = () => {
       {/* Navigation Links */}
       <nav className="flex flex-col w-full">
         {[
-          { label: "Main Dashboard", bg: "bg-yellow-700" },
-          { label: "Standings", bg: "bg-lime-800" },
-          { label: "Add Contest", bg: "bg-lime-800" },
-          { label: "Analytics", bg: "bg-lime-800" },
-          { label: "Get Plaques", bg: "bg-lime-800" },
-          { label: "Notifications", bg: "bg-lime-800" },
-          { label: "Marketplace", bg: "bg-lime-800" },
+          {
+            label: "Dashboard",
+            icon: <CreditCardIcon className=" inline size-7 pe-2 m-0" />,
+          },
+          {
+            label: "Standings",
+            icon: <ChartBarIcon className=" inline size-7 pe-2 m-0" />,
+          },
+          {
+            label: "Add Contest",
+            icon: <ChartBarIcon className=" inline size-7 pe-2 m-0" />,
+          },
+          {
+            label: "Analytics",
+            icon: <ChartPieIcon className=" inline size-7 pe-2 m-0" />,
+          },
+          {
+            label: "Get Plaques",
+            icon: <TrophyIcon className=" inline size-7 pe-2 m-0" />,
+          },
+          {
+            label: "Notifications",
+            icon: <BellAlertIcon className=" inline size-7 pe-2 m-0" />,
+          },
+          {
+            label: "Marketplace",
+            icon: (
+              <BuildingStorefrontIcon className=" inline size-7 pe-2 m-0" />
+            ),
+          },
         ].map((item, index) => (
           <div
             key={index}
-            className={`w-full py-2 px-4 text-white text-center font-semibold border border-white ${item.bg}`}
+            className={`py-2 ps-12 text-gray-900 text-left font-semibold border border-gray-300`}
           >
+            <span>{item.icon}</span>
             {item.label}
           </div>
         ))}
 
         {/* Spacer / Fill Bottom */}
-        <div className="flex-1 bg-yellow-500 border border-white"></div>
+        {/* <div className="flex-1 bg-yellow-500 border border-white"></div> */}
       </nav>
     </div>
   );
