@@ -12,7 +12,9 @@ import {
   PlusCircleIcon,
   PencilSquareIcon,
   EyeSlashIcon,
+  MinusCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 export default function NomineeBoard() {
   const [notifications, setNotifications] = useState([]); // should go into the dashboard
@@ -89,8 +91,10 @@ export default function NomineeBoard() {
         <div className="flex justify-between ">
           <h1 className="text-2xl pb-3">Gentleman of the Year</h1>
           <p onClick={() => setAddOpen(true)} className="text-green-600">
-            <PlusCircleIcon className="size-8 inline-block text-lime-700" />{" "}
-            <span>Add Nominee</span>
+            <span className="cursor-pointer hover:text-red-400">
+              <PlusCircleIcon className="size-8 inline-block text-lime-700 hover:text-red-400" />{" "}
+              <span>Add Nominee</span>
+            </span>
           </p>
         </div>
         <hr /> <br />
@@ -141,30 +145,35 @@ export default function NomineeBoard() {
           <p className="mt-4">Amount Per Vote</p>
           <p className="font-semibold">Ghc 0.5</p>
           <p className="mt-4">Voting Status</p>
-          <p className="text-green-600 font-bold">ONGOING</p>
+          <p className="text-red-600 font-bold">LIVE</p>
           <button className="mt-4 w-full bg-green-500 text-white py-1 rounded">
             Get Plaques/Citations
           </button>
-          <button className="mt-2 w-full bg-blue-500 text-white py-1 rounded">
-            Edit Voting Details
-          </button>
+          <Link to="/dashboard/manageevent">
+            <button className="mt-2 w-full bg-blue-500 text-white py-1 rounded hover:bg-orange-600 cursor-pointer">
+              Edit Voting Details
+            </button>
+          </Link>
           <br />
           <br />
-          <div className="flex flex-col items-center gap-1">
-            <button onClick={() => setEditOpen(true)} className="text-blue-600">
-              <PencilSquareIcon className="size-7 inline" /> Edit Nominee
+          <div className="flex flex-col items-start gap-1">
+            <button
+              onClick={() => setEditOpen(true)}
+              className="text-blue-600 cursor-pointer hover:text-blue-900"
+            >
+              <PencilSquareIcon className="size-6 inline me-2" /> Edit Nominee
             </button>
             <button
               onClick={() => setDeleteOpen(true)}
-              className="text-red-500"
+              className="text-red-600 cursor-pointer hover:text-red-800"
             >
-              Delete Nominee
+              <MinusCircleIcon className="size-6 inline me-2" /> Delete Nominee
             </button>
             <button
               onClick={() => setShowVotes(!showVotes)}
-              className="text-gray-700"
+              className="text-green-800 cursor-pointer hover:text-green-700"
             >
-              <EyeSlashIcon className="size-7 inline" />
+              <EyeSlashIcon className="size-6 inline me-2" />
               {showVotes ? "Hide Votes" : "Show Votes"}
             </button>
           </div>

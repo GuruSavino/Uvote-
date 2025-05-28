@@ -29,7 +29,7 @@ import { PencilSquareIcon, FilmIcon } from "@heroicons/react/24/outline";
 
 export default function EventCard({ title }) {
   return (
-    <div className="bg-white border rounded shadow-sm">
+    <div className="bg-white rounded drop-shadow-sm">
       <div className="p-6 text-center text-lg font-medium">{title}</div>
       <div className="grid grid-cols-2 gap-0 text-white text-center p-0 text-sm">
         <Link to="/dashboard/manageevent">

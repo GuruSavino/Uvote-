@@ -8,8 +8,7 @@ import AddCategoryForm from "./addCategoryForm";
 import CategoryInfoModal from "./categoryInfoModal";
 import ModalWrapper from "../../molecules/modalWrapper";
 import ToggleButton from "./toggleButton";
-// import CategoryInfoModal from "../components/CategoryInfoModal";
-// import ModalWrapper from "../components/ModalWrapper";
+import { Link } from "react-router-dom";
 
 const ManageContestDashboard = () => {
   const [categories, setCategories] = useState([]);
@@ -89,24 +88,24 @@ const ManageContestDashboard = () => {
             <p className="text-white px-4 text-xl">Nominees</p>
             <p className="text-2xl text-white font-semibold">{nominees}</p>
           </div>
-          <div className="bg-gray-500 flex justify-start items-center p-4 rounded-lg shadow text-center">
-            <p className="text-black-800 text-xl px-4">Categories</p>
+          <div className="text-white bg-gray-500 flex justify-start items-center p-4 rounded-lg shadow text-center">
+            <p className="text-xl px-4">Categories</p>
             <p className="text-2xl text-black-800 font-semibold">
               {categories.length}
             </p>
           </div>
         </div>
         {/* Category Section */}
-        <div className="flex justify-around items-center mb-4">
+        <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl text-center font-bold">Categories</h1>
           <p className="flex items-center">
-            <PlusCircleIcon className="size-7 me-0" />
-            <span
+            <button
               onClick={() => setShowAddModal(true)}
-              className=" text-lime-600 font-bold px-4 py-2 hover:text-blue-700 ps-1"
+              className="text-lime-600 font-bold px-4 py-2 hover:text-lime-800 cursor-pointer transition-all ease-in duration-100"
             >
+              <PlusCircleIcon className="inline size-7 me-1" />
               Add Category
-            </span>
+            </button>
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -121,12 +120,17 @@ const ManageContestDashboard = () => {
                   N-{cat.contestants}
                 </span>
               </div>
-              <button
-                onClick={() => setSelectedCategory(cat)}
-                className="text-blue-600 hover:underline text-sm"
-              >
-                Category Info
-              </button>
+              <p className="flex justify-between">
+                <button
+                  onClick={() => setSelectedCategory(cat)}
+                  className="text-gray-600 hover:text-blue-400 text-sm cursor-pointer transition-all ease-in duration-100"
+                >
+                  Summary
+                </button>
+                <button className="text-orange-600 hover:text-orange-400 text-sm cursor-pointer transition-all ease-in duration-100">
+                  <Link to="/dashboard/nomineeboard">Manage</Link>
+                </button>
+              </p>
             </div>
           ))}
         </div>
@@ -167,12 +171,14 @@ const ManageContestDashboard = () => {
           <p className="font-semibold">Ghc 0.5</p>
           <p className="mt-4">Voting Status</p>
           <p className="text-green-600 font-bold">ONGOING</p>
-          <button className="mt-4 w-full bg-green-500 text-white py-1 rounded">
+          <button className="mt-4 w-full bg-green-500 text-white py-1 rounded cursor-pointer hover:bg-green-700 transition-all ease-in duration-100">
             Get Plaques/Citations
           </button>
-          <button className="mt-2 w-full bg-blue-500 text-white py-1 rounded">
-            Edit Voting Details
-          </button>
+          <Link to="/dashboard/manageevent">
+            <button className="mt-2 w-full bg-blue-500 text-white py-1 rounded hover:bg-orange-600 cursor-pointer transition-all ease-in duration-100">
+              Edit Voting Details
+            </button>
+          </Link>
         </div>
         {/**end right controsl */}
       </div>
@@ -197,128 +203,3 @@ const ManageContestDashboard = () => {
 };
 
 export default ManageContestDashboard;
-
-///// before the modal wrapper
-
-// import React, { useState, useEffect } from "react";
-// import AddCategoryForm from "./addCategoryForm";
-// import CategoryCard from "./categoryCard";
-// import CategoryInfoModal from "./categoryInfoModal";
-// import { BellIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
-// //import { Bell, Mail } from "lucide-react";
-
-// const ManageContestDashboard = () => {
-//   const [showForm, setShowForm] = useState(false);
-//   const [categories, setCategories] = useState([]);
-//   const [votes, setVotes] = useState(0);
-//   const [nominees, setNominees] = useState(0);
-//   const [selectedCategory, setSelectedCategory] = useState(null);
-//   const [showResults, setShowResults] = useState(true);
-//   const [notifications, setNotifications] = useState(5);
-//   const [messages, setMessages] = useState(8);
-
-//   useEffect(() => {
-//     // Simulate API calls
-//     setVotes(12000);
-//     setNominees(71);
-//     setCategories(
-//       Array(6).fill({
-//         name: "GENTLEMAN OF THE YEAR",
-//         contestants: 5,
-//         votes: 420,
-//         createdAt: "2025-04-01",
-//       })
-//     );
-//   }, []);
-
-//   return (
-//     <div className="p-6 bg-gray-100 min-h-screen">
-//       <h1 className="text-center text-2xl font-bold mb-4">
-//         GHANA'S MOST BEAUTIFUL 26 CONTEST
-//       </h1>
-//       <div className="grid grid-cols-3 gap-4 mb-6">
-//         <div className="bg-blue-500 text-white p-4 rounded">
-//           <p>Total Votes</p>
-//           <h2 className="text-2xl font-bold">{votes}</h2>
-//         </div>
-//         <div className="bg-purple-500 text-white p-4 rounded">
-//           <p>Nominees</p>
-//           <h2 className="text-2xl font-bold">{nominees}</h2>
-//         </div>
-//         <div className="bg-gray-400 text-white p-4 rounded">
-//           <p>Categories</p>
-//           <h2 className="text-2xl font-bold">{categories.length}</h2>
-//         </div>
-//       </div>
-
-//       <div className="flex items-center justify-between mb-4">
-//         <h2 className="text-xl font-bold underline">Categories</h2>
-//         <button
-//           onClick={() => setShowForm(true)}
-//           className="text-green-600 flex items-center space-x-1"
-//         >
-//           <span className="text-xl">+</span> <span>Add</span>
-//         </button>
-//       </div>
-
-//       <div className="grid grid-cols-3 gap-4 mb-10">
-//         {categories.map((cat, idx) => (
-//           <CategoryCard
-//             key={idx}
-//             category={cat}
-//             onInfoClick={setSelectedCategory}
-//           />
-//         ))}
-//       </div>
-
-//       <div className="absolute top-6 right-6 space-y-3">
-//         <div className="flex justify-end space-x-4">
-//           <div className="relative">
-//             <BellIcon />
-//             {notifications > 0 && (
-//               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
-//                 {notifications}
-//               </span>
-//             )}
-//           </div>
-//           <div className="relative">
-//             <EnvelopeIcon />
-//             {messages > 0 && (
-//               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 rounded-full">
-//                 {messages}
-//               </span>
-//             )}
-//           </div>
-//         </div>
-
-//         <div className="bg-white p-4 rounded shadow-md w-64">
-//           <p className="mb-2">Show Results</p>
-//           <ToggleButton
-//             isOn={showResults}
-//             toggle={() => setShowResults(!showResults)}
-//           />
-//           <p className="mt-4">Amount Per Vote</p>
-//           <p className="font-semibold">Ghc 0.5</p>
-//           <p className="mt-4">Voting Status</p>
-//           <p className="text-green-600 font-bold">ONGOING</p>
-//           <button className="mt-4 w-full bg-green-500 text-white py-1 rounded">
-//             Get Plaques/Citations
-//           </button>
-//           <button className="mt-2 w-full bg-blue-500 text-white py-1 rounded">
-//             Edit Voting Details
-//           </button>
-//         </div>
-//       </div>
-
-//       {showForm && <AddCategoryForm onClose={() => setShowForm(false)} />}
-//       {selectedCategory && (
-//         <CategoryInfoModal
-//           category={selectedCategory}
-//           onClose={() => setSelectedCategory(null)}
-//         />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ManageContestDashboard;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 //import { Line } from "react-chartjs-2";
 import TicketTabcontent from "./ticketManagement";
 import VotingTabcontent from "./votingManagement";
+import MarketingTabcontent from "./marketingManagement";
 import {
   Chart as ChartJS,
   LineElement,
@@ -77,7 +78,7 @@ export default function ManageEventTabcontent() {
       {activeTab === "Voting" && <VotingTabcontent />}
 
       {activeTab === "Ticket Management" && <TicketTabcontent />}
-      {activeTab === "Marketing" && <VotingTabcontent />}
+      {activeTab === "Marketing" && <MarketingTabcontent />}
     </div>
   );
 }

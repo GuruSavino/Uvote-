@@ -8,7 +8,7 @@ import {
   AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/outline";
 
-// import NewEventModal from "./newEventModal";
+import NewEventModal from "./newEventModal";
 import ModifyEventModal from "./modifyEventModal";
 import ModalWrapper from "../../molecules/modalWrapper";
 import { Link } from "react-router-dom";
@@ -84,12 +84,12 @@ export default function MainDashboard() {
           </div>
         </div>
 
-        <div>
+        {/* <div className="hidden">
           <h2 className="text-xl font-semibold mb-2">Previous Events</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <EventCard title="Ghana Music Awards" />
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Right Pane - 3/12 columns */}
@@ -116,20 +116,23 @@ export default function MainDashboard() {
         </div>
 
         {contests.map((contest, idx) => (
-          <div key={idx} className="border rounded p-3">
+          <div
+            key={idx}
+            className="border border-gray-300 rounded p-3 drop-shadow-sm bg-white"
+          >
             <p className="font-medium">{contest.eventName}</p>
             <p className="text-sm text-gray-600">
               {contest.votes.toLocaleString()} votes{" "}
               <span className="text-red-500 ml-2">
-                {contest.daysRemaining} days more
+                {contest.daysRemaining} Days to End voting
               </span>
             </p>
           </div>
         ))}
       </div>
 
-      {/*Modals*/}
-      {/* <ModalWrapper open={newEventOpen} onClose={handleCloseModal}>
+      {/* Modals
+      <ModalWrapper open={newEventOpen} onClose={handleCloseModal}>
         <NewEventModal
           onClose={handleCloseModal}
           onSubmit={handleSubmitEvent}
@@ -146,17 +149,3 @@ export default function MainDashboard() {
     </div>
   );
 }
-
-// export default function Dashboard() {
-
-//   return (
-//     <div>
-//       {/* Dashboard content */}
-//       <button onClick={handleOpenNewEventModal}>+ New Event</button>
-//       <button onClick={() => handleOpenModifyEventModal(event)}>Modify Event</button>
-
-//       {/* Modals */}
-
-//     </div>
-//   );
-// }

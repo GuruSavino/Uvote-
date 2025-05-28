@@ -32,7 +32,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-gray-100 flex items-center justify-center">
+    <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-green-500 to-red-500 via-orange-500 flex items-center justify-center">
       {/* Login Form */}
       <div
         className={`absolute w-full max-w-md px-8 py-10 bg-white rounded-lg shadow-lg transition-all duration-500 ease-in-out ${

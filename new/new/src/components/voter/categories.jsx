@@ -15,14 +15,16 @@ export default function Categories() {
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
       <div className="p-8">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-blue-600 mb-2">Uvote.com</h1>
-          <h2 className="text-xl font-semibold mb-4">
+          <h1 className="text-3xl font-bold text-orange-600 mb-2">VOTIVE</h1>
+          <h2 className="text-lg font-semibold mb-4">
             GSCS Dinner and Awards Night
           </h2>
         </div>
 
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-4">Award Categories</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            Select Award Category to Vote in
+          </h3>
           <ul className="space-y-3">
             {categories.map((category, index) => (
               <li key={index}>

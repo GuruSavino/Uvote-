@@ -8,6 +8,7 @@ import {
   CreditCardIcon,
   BellIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -28,6 +29,7 @@ const Sidebar = () => {
           {
             label: "Dashboard",
             icon: <CreditCardIcon className=" inline size-7 pe-2 m-0" />,
+            destination: "/dashboard",
           },
           {
             label: "Standings",
@@ -56,13 +58,15 @@ const Sidebar = () => {
             ),
           },
         ].map((item, index) => (
-          <div
-            key={index}
-            className={`py-2 ps-12 text-gray-900 text-left font-semibold border border-gray-300`}
-          >
-            <span>{item.icon}</span>
-            {item.label}
-          </div>
+          <Link to={item.destination}>
+            <div
+              key={index}
+              className={`py-2 ps-12 text-gray-900 text-left font-semibold border border-gray-300 hover:bg-gray-300 cursor-pointer`}
+            >
+              <span>{item.icon}</span>
+              {item.label}
+            </div>
+          </Link>
         ))}
 
         {/* Spacer / Fill Bottom */}
