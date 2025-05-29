@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NomineeCard from "./nomineeCard";
-import ModalWrapper from "./modalWrapper";
+import Modal from "../../../molecules/modal";
 import EditNomineeModal from "./editNomineeModal";
 import DeleteNomineeModal from "./deleteNomineeModal";
 import AddNomineeModal from "./addNomineeModal";
@@ -181,35 +181,39 @@ export default function NomineeBoard() {
         {/**end right controsl */}
       </div>
 
-      <ModalWrapper open={addOpen} onClose={() => setAddOpen(false)}>
+      {/* <ModalWrapper open={addOpen} onClose={() => setAddOpen(false)}> */}
+      <Modal isOpen={addOpen} onClose={() => setAddOpen(false)}>
         <AddNomineeModal
           onClose={() => setAddOpen(false)}
           onAdd={(newNominee) => setNominees((prev) => [...prev, newNominee])}
         />
-      </ModalWrapper>
+      </Modal>
 
-      <ModalWrapper open={editOpen} onClose={() => setEditOpen(false)}>
+      {/* <ModalWrapper open={editOpen} onClose={() => setEditOpen(false)}> */}
+      <Modal isOpen={editOpen} onClose={() => setEditOpen(false)}>
         <EditNomineeModal
           onClose={() => setEditOpen(false)}
           nominees={nominees}
           refresh={() => window.location.reload()}
         />
-      </ModalWrapper>
+      </Modal>
 
-      <ModalWrapper open={deleteOpen} onClose={() => setDeleteOpen(false)}>
+      {/* <ModalWrapper open={deleteOpen} onClose={() => setDeleteOpen(false)}> */}
+      <Modal isOpen={deleteOpen} onClose={() => setDeleteOpen(false)}>
         <DeleteNomineeModal
           onClose={() => setDeleteOpen(false)}
           nominees={nominees}
           refresh={() => window.location.reload()}
         />
-      </ModalWrapper>
-
-      <ModalWrapper open={detailsOpen} onClose={() => setDetailsOpen(false)}>
+      </Modal>
+      {/* 
+      <ModalWrapper open={detailsOpen} onClose={() => setDetailsOpen(false)}> */}
+      <Modal isOpen={detailsOpen} onClose={() => setDetailsOpen(false)}>
         <NomineeDetailsModal
           nominee={selectedNominee}
           onClose={() => setDetailsOpen(false)}
         />
-      </ModalWrapper>
+      </Modal>
     </div>
   );
 }

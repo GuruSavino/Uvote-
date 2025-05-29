@@ -1,72 +1,7 @@
 import { useState } from "react";
 
-// export default function AddNomineeModal({ onClose, onAdd }) {
-//   const [form, setForm] = useState({
-//     name: "",
-//     description: "",
-//     image: "",
-//   });
-
-//   const handleChange = (e) => {
-//     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     const newNominee = {
-//       id: Date.now(), // temp unique ID
-//       name: form.name,
-//       description: form.description,
-//       image: form.image,
-//       code: "GD" + Math.floor(Math.random() * 100000), // simple code generator
-//       votes: 0,
-//     };
-
-//     onAdd(newNominee);
-//     onClose();
-//   };
-
-//   return (
-//     <div className="p-4">
-//       <h3 className="text-xl font-semibold mb-4">Add New Nominee</h3>
-//       <form onSubmit={handleSubmit} className="space-y-4">
-//         <input
-//           name="name"
-//           placeholder="Name"
-//           value={form.name}
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//           required
-//         />
-//         <input
-//           name="description"
-//           placeholder="Description"
-//           value={form.description}
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//           required
-//         />
-//         <input
-//           name="image"
-//           placeholder="Image URL"
-//           value={form.image}
-//           onChange={handleChange}
-//           className="w-full p-2 border rounded"
-//           required
-//         />
-//         <button
-//           type="submit"
-//           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-//         >
-//           Add Nominee
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
-
 export default function AddNomineeModal({ onClose, onSubmit }) {
+  // export default function AddNomineeModal({ onSubmit }) {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -101,7 +36,7 @@ export default function AddNomineeModal({ onClose, onSubmit }) {
       .then((res) => res.json())
       .then((newNominee) => {
         onSubmit(newNominee);
-        onClose();
+        //onClose();
       })
       .catch((err) => {
         console.error("Error uploading nominee:", err);
@@ -120,7 +55,7 @@ export default function AddNomineeModal({ onClose, onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 space-y-4">
+    <form onSubmit={handleSubmit} className="p-8 space-y-4 w-full">
       <div>
         <label className="block text-sm font-medium text-gray-700">Name</label>
         <input

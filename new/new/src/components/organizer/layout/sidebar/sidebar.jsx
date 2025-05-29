@@ -30,6 +30,7 @@ const Sidebar = () => {
             label: "Dashboard",
             icon: <CreditCardIcon className=" inline size-7 pe-2 m-0" />,
             destination: "/dashboard",
+            isActive: true,
           },
           {
             label: "Standings",
@@ -61,7 +62,9 @@ const Sidebar = () => {
           <Link to={item.destination}>
             <div
               key={index}
-              className={`py-2 ps-12 text-gray-900 text-left font-semibold border border-gray-300 hover:bg-gray-300 cursor-pointer`}
+              className={`py-2 ps-12 text-gray-900 text-left font-semibold border ${
+                item.isActive ? "bg-gray-300" : ""
+              } border-gray-300 hover:bg-gray-300 cursor-pointer`}
             >
               <span>{item.icon}</span>
               {item.label}

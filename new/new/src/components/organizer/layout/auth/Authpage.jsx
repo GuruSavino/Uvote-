@@ -34,6 +34,15 @@ export default function AuthPage() {
   return (
     <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-green-500 to-red-500 via-orange-500 flex items-center justify-center">
       {/* Login Form */}
+      <p
+        className={`self-start text-white text-center ${
+          activeForm == "signup" ? "pt-5 mt-5" : "pt-20 mt-10"
+        } transition-all duration-800 ease-in-out`}
+      >
+        <h1 className=" text-5xl font-extrabold">VOTIVE</h1>
+        <span>The Number 1 Online and USSD Voting Tool</span>
+      </p>
+
       <div
         className={`absolute w-full max-w-md px-8 py-10 bg-white rounded-lg shadow-lg transition-all duration-500 ease-in-out ${
           activeForm === "login"
@@ -49,7 +58,7 @@ export default function AuthPage() {
             </label>
             <input
               type="email"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-orange-500"
               placeholder="your@email.com"
               required
             />
@@ -60,14 +69,14 @@ export default function AuthPage() {
             </label>
             <input
               type="password"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-orange-500"
               placeholder="••••••••"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600"
           >
             Login
           </button>
@@ -75,7 +84,7 @@ export default function AuthPage() {
         <div className="mt-4 flex justify-between text-sm">
           <button
             onClick={switchToSignup}
-            className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none"
+            className="font-medium text-green-600 hover:text-green-500 focus:outline-none"
           >
             Create account
           </button>
@@ -114,7 +123,7 @@ export default function AuthPage() {
             </div>
             <button
               onClick={switchToLogin}
-              className="mt-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="mt-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
               Back to Login
             </button>
@@ -131,7 +140,7 @@ export default function AuthPage() {
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-green-500"
                   placeholder="Your Name"
                   required
                 />
@@ -142,7 +151,7 @@ export default function AuthPage() {
                 </label>
                 <input
                   type="email"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-green-500"
                   placeholder="your@email.com"
                   required
                 />
@@ -153,7 +162,7 @@ export default function AuthPage() {
                 </label>
                 <input
                   type="password"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-green-500"
                   placeholder="••••••••"
                   required
                   minLength="8"
@@ -165,7 +174,7 @@ export default function AuthPage() {
                 </label>
                 <input
                   type="password"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-green-500"
                   placeholder="••••••••"
                   required
                   minLength="8"
@@ -173,7 +182,7 @@ export default function AuthPage() {
               </div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
               >
                 Create Account
               </button>
@@ -182,7 +191,7 @@ export default function AuthPage() {
               Already have an account?{" "}
               <button
                 onClick={switchToLogin}
-                className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none"
+                className="font-medium text-green-700 hover:text-orange-800 focus:outline-none"
               >
                 Login
               </button>
@@ -207,7 +216,7 @@ export default function AuthPage() {
             </label>
             <input
               type="email"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-orange-500"
               placeholder="your@email.com"
               required
             />
@@ -218,14 +227,14 @@ export default function AuthPage() {
             </label>
             <input
               type="tel"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-orange-500"
               placeholder="+1 (123) 456-7890"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
             Send Reset Link
           </button>
@@ -234,7 +243,7 @@ export default function AuthPage() {
           Remember your password?{" "}
           <button
             onClick={switchToLogin}
-            className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none"
+            className="font-medium text-green-600 hover:text-green-700 focus:outline-none"
           >
             Login
           </button>

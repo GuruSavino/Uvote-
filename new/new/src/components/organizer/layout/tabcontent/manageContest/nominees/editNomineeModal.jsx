@@ -17,7 +17,7 @@ export default function EditNomineeModal({ onClose, nominees, refresh }) {
   };
 
   return (
-    <>
+    <div className="w-full p-8 h-auto">
       {!selected ? (
         <NomineeSelectList nominees={nominees} onSelect={setSelected} />
       ) : (
@@ -52,6 +52,6 @@ export default function EditNomineeModal({ onClose, nominees, refresh }) {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }

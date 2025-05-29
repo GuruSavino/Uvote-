@@ -12,7 +12,7 @@ export default function DeleteNomineeModal({ onClose, nominees, refresh }) {
   };
 
   return (
-    <>
+    <div className="w-full h-auto p-8">
       {!selected ? (
         <NomineeSelectList nominees={nominees} onSelect={setSelected} />
       ) : (
@@ -34,6 +34,6 @@ export default function DeleteNomineeModal({ onClose, nominees, refresh }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

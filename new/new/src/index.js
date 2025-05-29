@@ -14,6 +14,7 @@ import VoterLayout from "./components/voter/voterlayout";
 import Categories from "./components/voter/categories";
 import Checkout from "./components/voter/checkout";
 import VoterHome from "./components/voter/homepage";
+import SomeComponent from "./components/organizer/layout/tabcontent/manageContest/nominees/modaltest";
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(
 //   <React.StrictMode>
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Layout />,
+    // element: <SomeComponent />,
     children: [
       {
         index: true,

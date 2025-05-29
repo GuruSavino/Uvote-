@@ -1,6 +1,6 @@
 export default function NomineeSelectList({ nominees, onSelect }) {
   return (
-    <div>
+    <div className="">
       <h3 className="text-lg font-semibold mb-2">Select a Nominee</h3>
       <ul className="space-y-2">
         {nominees.map((nominee) => (

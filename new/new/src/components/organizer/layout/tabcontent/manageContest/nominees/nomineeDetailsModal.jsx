@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function NomineeDetailsModal({ nominee, onClose }) {
+export default function NomineeDetailsModal({ nominee }) {
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function NomineeDetailsModal({ nominee, onClose }) {
   if (!details) return <div className="p-4">Loading...</div>;
 
   return (
-    <div className="p-4 max-w-md mx-auto">
+    <div className="p-8 w-full mx-auto h-auto">
       <img
         src={details.image}
         alt={details.name}

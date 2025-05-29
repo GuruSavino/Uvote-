@@ -33,7 +33,7 @@ export default function EventCard({ title }) {
       <div className="p-6 text-center text-lg font-medium">{title}</div>
       <div className="grid grid-cols-2 gap-0 text-white text-center p-0 text-sm">
         <Link to="/dashboard/manageevent">
-          <div className="block w-full py-3 bg-indigo-500 hover:bg-indigo-600 no-underline">
+          <div className="block w-full py-3 bg-orange-600 hover:bg-orange-700 no-underline">
             <FilmIcon className="inline size-7 pe-2" />
             Manage Event
           </div>
