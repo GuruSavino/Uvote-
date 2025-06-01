@@ -13,8 +13,6 @@ urlpatterns = [
     path('contestants/create/', ContestantCreateView.as_view(), name='contestant-create'),
     path('contestants/<str:event_id>/', ContestantListView.as_view(), name='contestant-list'),
 
-    path('votes/<int:contestant_id>/', VoteCreateView.as_view(), name='vote-create'),
-
     path('payments/init/', PaystackInitPaymentView.as_view(), name='paystack-init'),
     path('payments/verify/', PaystackVerifyPaymentView.as_view(), name='paystack-verify'),
 ]
