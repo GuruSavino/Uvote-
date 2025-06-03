@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 
       {/* Solid white modal content */}
       <div
-        className="fixed w-2/3 flex items-center justify-center transition-opacity duration-200 bg-white rounded-lg shadow-xl overflow-auto"
+        className="fixed w-1/3 flex items-center justify-center transition-opacity duration-200 bg-white rounded-lg shadow-xl overflow-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

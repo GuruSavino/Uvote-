@@ -13,8 +13,7 @@ import Nominees from "./components/voter/nominees";
 import VoterLayout from "./components/voter/voterlayout";
 import Categories from "./components/voter/categories";
 import Checkout from "./components/voter/checkout";
-import VoterHome from "./components/voter/homepage";
-import SomeComponent from "./components/organizer/layout/tabcontent/manageContest/nominees/modaltest";
+import VoterLandingPage from "./components/voter/landingpage";
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(
 //   <React.StrictMode>
@@ -43,13 +42,15 @@ const router = createBrowserRouter([
     element: <Authpage />,
   },
   {
-    path: "/home",
+    path: "home",
     element: <VoterLayout />,
     children: [
-      { index: true, element: <VoterHome /> },
+      { index: true, element: <VoterLandingPage /> },
       { path: "categories", element: <Categories /> },
-      { path: "nominees/:category", element: <Nominees /> },
+      { path: "nominees/:id", element: <Nominees /> },
       { path: "checkout/:nomineeId", element: <Checkout /> },
+      // { path: "nominees/:category", element: <Nominees /> },
+      // { path: "checkout/:nomineeId", element: <Checkout /> },
     ],
   },
 
