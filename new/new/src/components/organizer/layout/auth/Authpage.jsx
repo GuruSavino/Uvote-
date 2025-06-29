@@ -22,14 +22,74 @@ export default function AuthPage() {
     setShowVerificationMessage(false);
   };
 
-  const handleSignupSubmit = (e) => {
+  // const handleSignupSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Here you would typically call your backend API
+
+  //   // For demo, we'll just show the verification message
+
+  //   // const formEmail = e.target.elements.email.value;
+  //   // setEmail(formEmail);
+  //   // setShowVerificationMessage(true);
+  // };
+
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically call your backend API
-    // For demo, we'll just show the verification message
-    const formEmail = e.target.elements.email.value;
-    setEmail(formEmail);
-    setShowVerificationMessage(true);
+
+    // Get form values
+    const form = e.target;
+    const fullName = form[0].value.trim(); // Full Name
+    const email = form[1].value.trim(); // Email
+    const phoneNumber = form[2].value.trim(); // Phone Number
+    const password = form[3].value.trim(); // Password
+    const confirmPassword = form[4].value.trim(); // Confirm Password
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    const payload = {
+      email: email,
+      username: fullName, // Assuming username is full name
+      password: password,
+      role: "administrator", // Adjust as needed: "voter", etc.
+      phone_number: phoneNumber,
+    };
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/users/register/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Registration failed:", data);
+        alert(data?.detail || "Registration failed.");
+        return;
+      }
+
+      // Store email and show verification message
+      setEmail(email);
+      setShowVerificationMessage(true);
+      console.log("User registered:", data);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Network error. Please try again.");
+    }
   };
+
+  const handleLogInSubmit = () =>{
+    
+  }
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-green-500 to-red-500 via-orange-500 flex items-center justify-center">
@@ -77,6 +137,7 @@ export default function AuthPage() {
           <button
             type="submit"
             className="w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600"
+            onClick={handleLogInSubmit}
           >
             Login
           </button>
@@ -97,7 +158,7 @@ export default function AuthPage() {
         </div>
       </div>
 
-      {/* Signup Form */}
+      {/* Signup Form //////////////////////////////////////////////*/}
       <div
         className={`absolute w-full max-w-md px-8 py-10 bg-white rounded-lg shadow-lg transition-all duration-500 ease-in-out ${
           activeForm === "signup"
@@ -153,6 +214,17 @@ export default function AuthPage() {
                   type="email"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-green-500"
                   placeholder="your@email.com"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Phone Number
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-green-500"
+                  placeholder="0511111111"
                   required
                 />
               </div>
