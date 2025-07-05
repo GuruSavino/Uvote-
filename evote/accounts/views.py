@@ -10,34 +10,6 @@ from .models import CustomUser
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
 
 
-# class RootAPIView(APIView):
-#     permission_classes = [AllowAny]
-
-#     @swagger_auto_schema(
-#         operation_summary="Root API Endpoint",
-#         operation_description="Provides the URLs for the available endpoints in the API.",
-#         responses={
-#             200: openapi.Response(
-#                 'Successful operation',
-#                 schema=openapi.Schema(
-#                     type=openapi.TYPE_OBJECT,
-#                 )
-#             )
-#         },
-#         tags=['Root']
-#     )
-#     def get(self, request, *args, **kwargs):
-#         api_urls = {
-#             "Register": "/api/users/register/",
-#             "Login": "/api/users/login/",
-#             "User Profile (GET/PUT)": "/api/users/profile/",
-#             "Swagger Docs": "/swagger/",
-#             "Admin Panel": "/admin/"
-#         }
-#         return Response(api_urls, status=status.HTTP_200_OK)
-    
-
-
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
     return {

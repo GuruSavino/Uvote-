@@ -17,6 +17,7 @@ from .models import Payment
 from datetime import datetime
 from .serializers import PaystackVerifyRequestSerializer
 
+
 # This view handles the creation of events by organizers.
 class EventCreateView(CreateAPIView):
     serializer_class = EventSerializer
@@ -25,12 +26,12 @@ class EventCreateView(CreateAPIView):
     @swagger_auto_schema(
         operation_summary="Create a new event",
         operation_description="Authenticated users (organizers) can create events.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def perform_create(self, serializer):
         self.created_event = serializer.save(organizer=self.request.user)
 
-    def create(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
         response.data = {
             "message": "Event created successfully.",
@@ -49,7 +50,7 @@ class EventListView(ListAPIView):
     @swagger_auto_schema(
         operation_summary="List organizer's events",
         operation_description="List all events created by the authenticated organizer.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -68,7 +69,7 @@ class EventDetailView(RetrieveAPIView):
     @swagger_auto_schema(
         operation_summary="Public single event view",
         operation_description="Anyone can view details of a specific event by ID.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def get(self, request, *args, **kwargs):
         event = self.get_object()
@@ -90,11 +91,23 @@ class EventUpdateDeleteView(RetrieveUpdateDestroyAPIView):
         if obj.organizer != self.request.user:
             raise PermissionDenied("You are not authorized to modify this event.")
         return obj
-
+    
+    @swagger_auto_schema(
+        operation_summary="Retrieve a single event",
+        tags=["Organizer"]
+    )
+    def get(self, request, *args, **kwargs):
+        event = self.get_object()
+        serializer = self.get_serializer(event)
+        return Response({
+            "message": "Event retrieved successfully.",
+            "event": serializer.data
+        })
+    
     @swagger_auto_schema(
         operation_summary="Update an event",
         operation_description="Allows the organizer to update their event.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def put(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)
@@ -107,7 +120,7 @@ class EventUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     @swagger_auto_schema(
         operation_summary="Delete an event",
         operation_description="Allows the organizer to delete their event.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def delete(self, request, *args, **kwargs):
         super().delete(request, *args, **kwargs)
@@ -115,7 +128,7 @@ class EventUpdateDeleteView(RetrieveUpdateDestroyAPIView):
             "message": "Event deleted successfully."
         }, status=status.HTTP_204_NO_CONTENT)
 
-# # Contestant Views
+# Contestant Views
 
 class ContestantCreateView(CreateAPIView):
     serializer_class = ContestantSerializer
@@ -124,9 +137,9 @@ class ContestantCreateView(CreateAPIView):
     @swagger_auto_schema(
         operation_summary="Add a contestant to an event",
         operation_description="Organizer can add a contestant to their event.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
-    def create(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         event_id = request.data.get("event")
         event = Event.objects.get(event_id=event_id)
 
@@ -153,7 +166,7 @@ class ContestantListView(ListAPIView):
     @swagger_auto_schema(
         operation_summary="List contestants for an event",
         operation_description="Anyone can view contestants in a specific event.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def get(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -178,7 +191,7 @@ class ContestantUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     @swagger_auto_schema(
         operation_summary="Update a contestant",
         operation_description="Allows the organizer to update a contestant in their event.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def put(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)
@@ -191,13 +204,63 @@ class ContestantUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     @swagger_auto_schema(
         operation_summary="Delete a contestant",
         operation_description="Allows the organizer to delete a contestant from their event.",
-        tags=["organizer"]
+        tags=["Organizer"]
     )
     def delete(self, request, *args, **kwargs):
         super().delete(request, *args, **kwargs)
         return Response({
             "message": "Contestant deleted successfully."
         }, status=status.HTTP_204_NO_CONTENT)
+
+
+
+# This view allows organizers to toggle the voting status of their events.
+
+class ToggleVotingStatusView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @swagger_auto_schema(
+        operation_summary="Toggle voting status for an event",
+        operation_description="Organizer can enable or disable voting for their own event.",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'voting_status': openapi.Schema(
+                    type=openapi.TYPE_BOOLEAN,
+                    description='True to enable voting, False to disable'
+                )
+            },
+            required=['voting_status']
+        ),
+        responses={
+            200: openapi.Response(
+                description="Voting status updated.",
+                examples={"application/json": {"message": "Voting turned off", "voting_status": False}}
+            ),
+            403: "Unauthorized access to this event"
+        },
+        tags=["Organizer"]
+    )
+    def patch(self, request, event_id):
+        try:
+            event = Event.objects.get(event_id=event_id)
+        except Event.DoesNotExist:
+            return Response({"message": "Event not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        if event.organizer != request.user:
+            raise PermissionDenied("You are not authorized to modify this event.")
+
+        new_status = request.data.get("voting_status")
+        if new_status is None:
+            return Response({"message": "voting_status field is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        event.voting_status = new_status
+        event.save()
+
+        return Response({
+            "message": f"Voting turned {'on' if new_status else 'off'}.",
+            "voting_status": event.voting_status
+        }, status=status.HTTP_200_OK)
 
 
 from django.shortcuts import get_object_or_404
@@ -320,6 +383,7 @@ class PaystackInitPaymentView(APIView):
         }, status=status.HTTP_200_OK)
 
 
+from django.utils import timezone
 
 class PaystackVerifyPaymentView(APIView):
     permission_classes = [AllowAny]
@@ -386,7 +450,15 @@ class PaystackVerifyPaymentView(APIView):
             contestant = Contestant.objects.select_related('event').get(id=contestant_id)
         except Contestant.DoesNotExist:
             return Response({"message": "Invalid contestant."}, status=status.HTTP_404_NOT_FOUND)
+        event = contestant.event
 
+        if not event.voting_status:
+            return Response({"message": "Voting is currently disabled for this event."},
+                            status=status.HTTP_403_FORBIDDEN)
+        now = timezone.now()
+        if now < event.start_date or now > event.end_date:
+            return Response({"message": "Voting is not active at this time."},
+                            status=status.HTTP_403_FORBIDDEN)
         # Create Vote
         vote = Vote.objects.create(
             contestant=contestant,

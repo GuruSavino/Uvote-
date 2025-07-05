@@ -14,6 +14,7 @@ class Event(models.Model):
     logo_url = models.URLField(blank=True, null=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
+    voting_status = models.BooleanField(default=True)  # True = voting allowed, False = disabled
     vote_type = models.CharField(max_length=10, choices=VOTE_TYPE_CHOICES)
     max_votes_per_user = models.PositiveIntegerField(default=1)
     price_per_vote = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
